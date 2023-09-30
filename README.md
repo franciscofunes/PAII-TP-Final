@@ -78,3 +78,29 @@ Como requisito funcional adicional deseable, se sugiere agregar una entidad de r
 **Dominio de la Entidad de Relación:** El dominio de la entidad de relación estará relacionado con la oferta académica de la institución y la inscripción de los estudiantes en cursos o asignaturas.
 
 Estos detalles proporcionan una visión más completa de la elección de la entidad "Alumno" y cómo se relaciona con el dominio de la aplicación, los campos necesarios y la entidad de relación. Puede personalizar este texto según sea necesario.
+
+
+### Casos de Uso
+    
+| N°  | Como    | Quiero                   | Para                           |
+|:---:|:-------:|:-------------------------:|:-----------------------------:|
+| 01 | Usuario | Obtener todos los estudiantes | Obtener una lista de todos los estudiantes registrados en el sistema. |
+|  | |  |  |
+| 02 | Usuario | [Agregar otro caso de uso] | [Propósito del caso de uso] |
+| 03 | Usuario | [Agregar otro caso de uso] | [Propósito del caso de uso] |
+| 04 | Usuario | [Agregar otro caso de uso] | [Propósito del caso de uso] |
+| 05 | Usuario | [Agregar otro caso de uso] | [Propósito del caso de uso] |
+|  | |  |  |
+| 06 | Usuario | [Agregar otro caso de uso] | [Propósito del caso de uso] |
+| 07 | Usuario | [Agregar otro caso de uso] | [Propósito del caso de uso] |
+| 08 | Usuario | [Agregar otro caso de uso] | [Propósito del caso de uso] |
+| 09 | Usuario | [Agregar otro caso de uso] | [Propósito del caso de uso] |
+|  | |  |  |
+| 10 | Usuario | [Agregar otro caso de uso] | [Propósito del caso de uso] |
+
+### Criterio de Aceptación
+
+| Criterio n° | Contexto | Evento | Resultado |
+|:-----------:|:-----------:|:--------:|:-----------:|
+| 01 | En la aplicación de gestión de alumnos | Se hace una solicitud GET a la ruta /Students de la API | Debería recibir una respuesta exitosa con un código de estado 200 (OK). La respuesta incluirá una lista de objetos JSON, donde cada objeto representa a un estudiante. Cada objeto de estudiante en la lista contendrá al menos la siguiente información: ID del estudiante, Nombre completo del estudiante, Edad del estudiante y otros campos relevantes según sea necesario. La lista de estudiantes estará ordenada de alguna manera para facilitar su visualización y búsqueda. La API requerirá autenticación y autorización adecuadas para acceder a la lista de estudiantes, permitiendo solo a usuarios autorizados obtener esta información.|
+
