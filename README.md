@@ -113,8 +113,10 @@ Para ejecutar este proyecto, es necesario instalar algunas bibliotecas y paquete
 ### Entity Framework Core y SQL Server
 
 ```bash
-dotnet add package Microsoft.EntityFrameworkCore --version 7.0.0
-dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 7.0.0
+dotnet add package Microsoft.EntityFrameworkCore
+dotnet add package Pomelo.EntityFrameworkCore.MySql
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 ```
 
 ## Ejecutar la solución

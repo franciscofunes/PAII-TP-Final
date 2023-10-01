@@ -12,7 +12,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<PAIIDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("PAIIDbConnection"));
+    var connectionString = builder.Configuration.GetConnectionString("multiplepurposefreedatabase");
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
 var app = builder.Build();

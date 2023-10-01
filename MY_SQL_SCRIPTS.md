@@ -1,10 +1,8 @@
-# SQL SERVER SCRIPTS USED
+# MySQL SERVER SCRIPTS USED
 
 ```sql
-CREATE DATABASE PAIIDB
-
 CREATE TABLE Alumnos (
-    Id INT IDENTITY(1,1) NOT NULL,
+    Id INT AUTO_INCREMENT NOT NULL,
     Nombre VARCHAR(100) NOT NULL,
     Apellido VARCHAR(100) NOT NULL,
     NumIdentificacion INT UNIQUE NOT NULL,
@@ -12,10 +10,10 @@ CREATE TABLE Alumnos (
     Direccion VARCHAR(255) NOT NULL,
     Telefono VARCHAR(20) NOT NULL,
     CorreoElectronico VARCHAR(255) NOT NULL,
-    Carrera VARCHAR(100) NOT NULL, -- Assuming Carrera is a string field.
+    Carrera VARCHAR(100) NOT NULL,
     Promedio DECIMAL(5, 2) CHECK (Promedio >= 1 AND Promedio <= 100) NOT NULL,
     FechaIngreso DATE NOT NULL,
-    CONSTRAINT PK_Alumnos PRIMARY KEY (Id)
+    PRIMARY KEY (Id)
 );
 
 INSERT INTO Alumnos (Nombre, Apellido, NumIdentificacion, FechaNacimiento, Direccion, Telefono, CorreoElectronico, Carrera, Promedio, FechaIngreso)
@@ -24,10 +22,5 @@ VALUES
     ('Maria', 'Gomez', 54321, '1992-08-20', '456 Calle Secundaria', '555-987-6543', 'maria.gomez@email.com', 'Medicina', 91.2, '2019-10-15'),
     ('Pedro', 'Rodriguez', 67890, '1988-03-10', '789 Calle Terciaria', '555-456-7890', 'pedro.rodriguez@email.com', 'Derecho', 76.8, '2021-01-05');
 
--- Use GO to separate batches
-GO
-
 ```
-
-> Connection string: Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=PAIIDB;Integrated Security=True;Connect Timeout=30
 
