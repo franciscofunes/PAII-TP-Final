@@ -98,13 +98,12 @@ Estos detalles proporcionan una visión más completa de la elección de la enti
 |  | |  |  |
 | 10 | Usuario | [Agregar otro caso de uso] | [Propósito del caso de uso] |
 
-### Criterio de Aceptación
+### Criterios de Aceptación
 
 | Criterio n° | Contexto | Evento | Resultado |
 |:-----------:|:-----------:|:--------:|:-----------:|
 | 01 | En la aplicación de gestión de alumnos | Se hace una solicitud GET a la ruta /Alumnos de la API | Debería recibir una respuesta exitosa con un código de estado 200 (OK). La respuesta incluirá una lista de objetos JSON, donde cada objeto representa a un estudiante. Cada objeto de estudiante en la lista contendrá al menos la siguiente información: ID del estudiante, Nombre completo del estudiante, Edad del estudiante y otros campos relevantes según sea necesario. La lista de estudiantes estará ordenada de alguna manera para facilitar su visualización y búsqueda. La API requerirá autenticación y autorización adecuadas para acceder a la lista de estudiantes, permitiendo solo a usuarios autorizados obtener esta información.|
 
-Server=localhost\MSSQLSERVER01;Database=master;Trusted_Connection=True;
 
 ## Instalación de Paquetes
 
