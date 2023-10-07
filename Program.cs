@@ -1,5 +1,7 @@
 using Data;
 using Microsoft.EntityFrameworkCore;
+using PAII_TP_Final.Contracts;
+using PAII_TP_Final.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,9 @@ builder.Services.AddDbContext<PAIIDbContext>(options =>
     var connectionString = builder.Configuration.GetConnectionString("multiplepurposefreedatabase");
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
+
+builder.Services.AddScoped<IAlumnosService, AlumnosService>(); 
+
 
 var app = builder.Build();
 
