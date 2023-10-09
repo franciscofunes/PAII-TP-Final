@@ -54,5 +54,29 @@ namespace PAII_TP_Final.Services
                 return false;
             }
         }
+        public async Task<Alumnos?> CreateStudentAsync(Alumnos alumno)
+{
+    if (alumno == null)
+    {
+        throw new ArgumentNullException(nameof(alumno));
+    }
+
+    try
+    {
+        // Agrega el nuevo alumno al contexto de la base de datos
+        _paIIDbContext.Alumnos.Add(alumno);
+        await _paIIDbContext.SaveChangesAsync();
+
+        // Devuelve el alumno creado con su ID actualizado
+        return alumno;
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"An error occurred: {ex}");
+        // manejar errores de validación o excepciones aquí según necesidades
+        return null;
+    }
+}
+
     }
 }
