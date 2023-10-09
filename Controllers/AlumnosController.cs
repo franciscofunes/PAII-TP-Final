@@ -55,5 +55,31 @@ namespace PAII_TP_Final.Controllers
                 return NotFound();
             }
         }
+    
+        [HttpPost]
+        public async Task<IActionResult> PostAsync([FromBody] Alumnos alumno)
+        {
+            if (alumno == null)
+            {
+                return BadRequest("El objeto de alumno es nulo.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var createdAlumno = await _alumnosService.CreateStudentAsync(alumno);
+
+            if (createdAlumno != null)
+            {
+                return CreatedAtAction("GetStudentByIdAsync", new { id = createdAlumno.Id }, createdAlumno);
+            }
+            else
+            {
+                return BadRequest("No se pudo crear el alumno.");
+            }
+        }
+
     }
 }

@@ -7,5 +7,6 @@ namespace PAII_TP_Final.Contracts
         Task<List<Alumnos>> GetAllStudentsAsync();
         Task<Alumnos?> GetStudentByIdAsync(int id);
         Task<bool> UpdateStudentAsync(int id, Alumnos updatedStudent);
+        Task<Alumnos?> CreateStudentAsync(Alumnos alumno);
     }
 }
