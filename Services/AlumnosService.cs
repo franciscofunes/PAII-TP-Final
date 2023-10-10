@@ -79,7 +79,7 @@ namespace PAII_TP_Final.Services
 }
         public async Task<bool> DeleteStudentAsync(int id)
 {
-    var existingStudent = await _paIIDbContext.Alumnos.FirstOrDefaultAsync(alumno => alumno.Id == id)
+        var existingStudent = await _paIIDbContext.Alumnos.FirstOrDefaultAsync(alumno => alumno.Id == id);
 
     if (existingStudent == null)
     {  
