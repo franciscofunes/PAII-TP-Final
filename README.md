@@ -86,9 +86,9 @@ Estos detalles proporcionan una visión más completa de la elección de la enti
 |:---:|:-------:|:-------------------------:|:-----------------------------:|
 | 01 | Usuario | Obtener todos los estudiantes | Obtener una lista de todos los estudiantes registrados en el sistema. |
 |  | |  |  |
-| 02 | Usuario | [Agregar otro caso de uso] | [Propósito del caso de uso] |
-| 03 | Usuario | [Agregar otro caso de uso] | [Propósito del caso de uso] |
-| 04 | Usuario | [Agregar otro caso de uso] | [Propósito del caso de uso] |
+| 02 | Usuario | Agregar un estudiante | Actualizar la lista de los estudiantes registrados en el sistema. |
+| 03 | Usuario | Modificar datos de un estudiante | Actualizar la información del estudiante en cuestión. |
+| 04 | Usuario | Eliminar un estudiante | Actualizar la lista de los estudiantes registrados en el sistema. |
 | 05 | Usuario | [Agregar otro caso de uso] | [Propósito del caso de uso] |
 |  | |  |  |
 | 06 | Usuario | [Agregar otro caso de uso] | [Propósito del caso de uso] |
