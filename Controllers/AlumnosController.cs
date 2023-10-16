@@ -73,7 +73,7 @@ namespace PAII_TP_Final.Controllers
 
             if (createdAlumno != null)
             {
-                return CreatedAtAction("GetStudentByIdAsync", new { id = createdAlumno.Id }, createdAlumno);
+                return StatusCode(201, new { id = createdAlumno.Id });
             }
             else
             {
