@@ -8,5 +8,6 @@ namespace PAII_TP_Final.Contracts
         Task<Alumnos?> GetStudentByIdAsync(int id);
         Task<bool> UpdateStudentAsync(int id, Alumnos updatedStudent);
         Task<Alumnos?> CreateStudentAsync(Alumnos alumno);
+        Task<bool> DeleteStudentAsync(int id);
     }
 }

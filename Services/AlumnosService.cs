@@ -77,6 +77,28 @@ namespace PAII_TP_Final.Services
         return null;
     }
 }
+        public async Task<bool> DeleteStudentAsync(int id)
+{
+        var existingStudent = await _paIIDbContext.Alumnos.FirstOrDefaultAsync(alumno => alumno.Id == id);
+
+    if (existingStudent == null)
+    {  
+        return false; 
+    }
+
+    _paIIDbContext.Alumnos.Remove(existingStudent);
+
+    try
+    {
+        await _paIIDbContext.SaveChangesAsync();
+        return true;
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"An error occurred: {ex}");
+        return false;
+    }
+}
 
     }
 }

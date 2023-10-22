@@ -81,5 +81,26 @@ namespace PAII_TP_Final.Controllers
             }
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteStudent(int id)
+        {
+            var student = await _alumnosService.GetStudentByIdAsync(id);
+
+            if (student == null)
+            {
+                return NotFound();
+            }
+
+            var success = await _alumnosService.DeleteStudentAsync(id);
+
+            if (success)
+            {
+                return NoContent();
+            }
+            else
+            {
+                return StatusCode(500,"No se pudo eliminar el alumno.");
+            }
+        }
     }
 }
