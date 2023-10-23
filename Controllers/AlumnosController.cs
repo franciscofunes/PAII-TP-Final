@@ -16,6 +16,9 @@ namespace PAII_TP_Final.Controllers
         }
 
         [HttpGet]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Alumnos>))]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetAsync()
         {
             var alumnos = await _alumnosService.GetAllStudentsAsync();
@@ -29,6 +32,9 @@ namespace PAII_TP_Final.Controllers
         }
 
         [HttpGet("{id}")]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Alumnos))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetStudentByIdAsync(int id)
         {
             var student = await _alumnosService.GetStudentByIdAsync(id);
@@ -42,6 +48,11 @@ namespace PAII_TP_Final.Controllers
         }
 
         [HttpPut("{id}")]
+        [Consumes("application/json")]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> PutAsync(int id, [FromBody] Alumnos updatedStudent)
         {
             var success = await _alumnosService.UpdateStudentAsync(id, updatedStudent);
@@ -55,8 +66,13 @@ namespace PAII_TP_Final.Controllers
                 return NotFound();
             }
         }
-    
+
         [HttpPost]
+        [Consumes("application/json")]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Alumnos))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> PostAsync([FromBody] Alumnos alumno)
         {
             if (alumno == null)
@@ -69,19 +85,32 @@ namespace PAII_TP_Final.Controllers
                 return BadRequest(ModelState);
             }
 
-            var createdAlumno = await _alumnosService.CreateStudentAsync(alumno);
+            try
+            {
+                var createdAlumno = await _alumnosService.CreateStudentAsync(alumno);
 
-            if (createdAlumno != null)
-            {
-                return StatusCode(201, new { id = createdAlumno.Id });
+                if (createdAlumno != null)
+                {
+                    return Created($"/api/alumnos/{createdAlumno.Id}", new { id = createdAlumno.Id });
+                }
+                else
+                {
+                    return BadRequest("El DNI ya existe en la base de datos.");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return BadRequest("No se pudo crear el alumno.");
+                Console.WriteLine($"An error occurred: {ex}");
+                // Handle exceptions or other validation errors here as needed.
+                return StatusCode(500, "Error interno del servidor.");
             }
         }
 
         [HttpDelete("{id}")]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> DeleteStudent(int id)
         {
             var student = await _alumnosService.GetStudentByIdAsync(id);
@@ -99,7 +128,7 @@ namespace PAII_TP_Final.Controllers
             }
             else
             {
-                return StatusCode(500,"No se pudo eliminar el alumno.");
+                return StatusCode(500, "No se pudo eliminar el alumno.");
             }
         }
     }

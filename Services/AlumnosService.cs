@@ -43,6 +43,7 @@ namespace PAII_TP_Final.Services
             existingStudent.Carrera = updatedStudent.Carrera;
             existingStudent.Promedio = updatedStudent.Promedio;
             existingStudent.FechaIngreso = updatedStudent.FechaIngreso;
+
             try
             {
                 await _paIIDbContext.SaveChangesAsync();
@@ -54,51 +55,57 @@ namespace PAII_TP_Final.Services
                 return false;
             }
         }
+
         public async Task<Alumnos?> CreateStudentAsync(Alumnos alumno)
-{
-    if (alumno == null)
-    {
-        throw new ArgumentNullException(nameof(alumno));
-    }
+        {
+            if (alumno == null)
+            {
+                throw new ArgumentNullException(nameof(alumno), "El objeto de alumno es nulo.");
+            }
 
-    try
-    {
-        // Agrega el nuevo alumno al contexto de la base de datos
-        _paIIDbContext.Alumnos.Add(alumno);
-        await _paIIDbContext.SaveChangesAsync();
+            if (await _paIIDbContext.Alumnos.AnyAsync(a => a.NumIdentificacion == alumno.NumIdentificacion))
+            {
+                return null;
+            }
 
-        // Devuelve el alumno creado con su ID actualizado
-        return alumno;
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"An error occurred: {ex}");
-        // manejar errores de validación o excepciones aquí según necesidades
-        return null;
-    }
-}
+            try
+            {
+                _paIIDbContext.Alumnos.Add(alumno);
+                await _paIIDbContext.SaveChangesAsync();
+
+                return alumno;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex}");
+
+                return null;
+            }
+        }
+
+
         public async Task<bool> DeleteStudentAsync(int id)
-{
-        var existingStudent = await _paIIDbContext.Alumnos.FirstOrDefaultAsync(alumno => alumno.Id == id);
+        {
+            var existingStudent = await _paIIDbContext.Alumnos.FirstOrDefaultAsync(alumno => alumno.Id == id);
 
-    if (existingStudent == null)
-    {  
-        return false; 
-    }
+            if (existingStudent == null)
+            {
+                return false;
+            }
 
-    _paIIDbContext.Alumnos.Remove(existingStudent);
+            _paIIDbContext.Alumnos.Remove(existingStudent);
 
-    try
-    {
-        await _paIIDbContext.SaveChangesAsync();
-        return true;
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"An error occurred: {ex}");
-        return false;
-    }
-}
+            try
+            {
+                await _paIIDbContext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex}");
+                return false;
+            }
+        }
 
     }
 }

@@ -16,7 +16,7 @@ public class PAIIDbContext : DbContext
     {
         modelBuilder.Entity<Alumnos>()
             .Property(a => a.Promedio)
-            .HasColumnType("decimal(5, 2)"); // Specify the SQL Server column type here
+            .HasColumnType("decimal(5, 2)");
 
         base.OnModelCreating(modelBuilder);
     }
