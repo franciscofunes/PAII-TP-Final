@@ -55,7 +55,7 @@ namespace PAII_TP_Final.Controllers
                 return NotFound();
             }
         }
-    
+
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] Alumnos alumno)
         {
@@ -69,15 +69,24 @@ namespace PAII_TP_Final.Controllers
                 return BadRequest(ModelState);
             }
 
-            var createdAlumno = await _alumnosService.CreateStudentAsync(alumno);
+            try
+            {
+                var createdAlumno = await _alumnosService.CreateStudentAsync(alumno);
 
-            if (createdAlumno != null)
-            {
-                return StatusCode(201, new { id = createdAlumno.Id });
+                if (createdAlumno != null)
+                {
+                    return Created($"/api/alumnos/{createdAlumno.Id}", new { id = createdAlumno.Id });
+                }
+                else
+                {
+                    return BadRequest("El DNI ya existe en la base de datos.");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return BadRequest("No se pudo crear el alumno.");
+                Console.WriteLine($"An error occurred: {ex}");
+                // Handle exceptions or other validation errors here as needed.
+                return StatusCode(500, "Error interno del servidor.");
             }
         }
 
@@ -99,7 +108,7 @@ namespace PAII_TP_Final.Controllers
             }
             else
             {
-                return StatusCode(500,"No se pudo eliminar el alumno.");
+                return StatusCode(500, "No se pudo eliminar el alumno.");
             }
         }
     }
