@@ -27,9 +27,10 @@ namespace Data.Entities
         public int NumIdentificacion { get; set; }
 
         /// <summary>
-        /// La fecha de nacimiento del alumno.
+        /// La fecha de nacimiento del alumno. (Formato válido: 1990-10-15)
         /// </summary>
         [Required(ErrorMessage = "La fecha de nacimiento es obligatoria.")]
+        [DataType(DataType.Date, ErrorMessage = "El formato de fecha no es válido.")]
         public DateTime FechaNacimiento { get; set; }
 
         /// <summary>
@@ -39,10 +40,10 @@ namespace Data.Entities
         public string? Direccion { get; set; }
 
         /// <summary>
-        /// El número de teléfono de contacto del alumno.
+        /// El número de teléfono de contacto del alumno. (Ejemplo válido: 1131127022)
         /// </summary>
         [Required(ErrorMessage = "El número de teléfono es obligatorio.")]
-        [Phone(ErrorMessage = "El número de teléfono no es válido.")]
+        [RegularExpression(@"^\d{8,15}$", ErrorMessage = "El número de teléfono no es válido.")]
         public string? Telefono { get; set; }
 
         /// <summary>
@@ -66,9 +67,10 @@ namespace Data.Entities
         public decimal Promedio { get; set; }
 
         /// <summary>
-        /// La fecha en que el alumno se matriculó en la institución.
+        /// La fecha en que el alumno se matriculó en la institución. (Formato válido: 2023-10-01)
         /// </summary>
         [Required(ErrorMessage = "La fecha de ingreso es obligatoria.")]
+        [DataType(DataType.Date, ErrorMessage = "El formato de fecha no es válido.")]
         public DateTime FechaIngreso { get; set; }
     }
 }

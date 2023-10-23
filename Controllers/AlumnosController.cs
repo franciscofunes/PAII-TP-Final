@@ -16,6 +16,9 @@ namespace PAII_TP_Final.Controllers
         }
 
         [HttpGet]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Alumnos>))]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetAsync()
         {
             var alumnos = await _alumnosService.GetAllStudentsAsync();
@@ -29,6 +32,9 @@ namespace PAII_TP_Final.Controllers
         }
 
         [HttpGet("{id}")]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Alumnos))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetStudentByIdAsync(int id)
         {
             var student = await _alumnosService.GetStudentByIdAsync(id);
@@ -42,6 +48,11 @@ namespace PAII_TP_Final.Controllers
         }
 
         [HttpPut("{id}")]
+        [Consumes("application/json")]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> PutAsync(int id, [FromBody] Alumnos updatedStudent)
         {
             var success = await _alumnosService.UpdateStudentAsync(id, updatedStudent);
@@ -57,6 +68,11 @@ namespace PAII_TP_Final.Controllers
         }
 
         [HttpPost]
+        [Consumes("application/json")]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Alumnos))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> PostAsync([FromBody] Alumnos alumno)
         {
             if (alumno == null)
@@ -91,6 +107,10 @@ namespace PAII_TP_Final.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> DeleteStudent(int id)
         {
             var student = await _alumnosService.GetStudentByIdAsync(id);

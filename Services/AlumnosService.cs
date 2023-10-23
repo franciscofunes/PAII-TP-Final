@@ -43,6 +43,7 @@ namespace PAII_TP_Final.Services
             existingStudent.Carrera = updatedStudent.Carrera;
             existingStudent.Promedio = updatedStudent.Promedio;
             existingStudent.FechaIngreso = updatedStudent.FechaIngreso;
+
             try
             {
                 await _paIIDbContext.SaveChangesAsync();
@@ -62,10 +63,8 @@ namespace PAII_TP_Final.Services
                 throw new ArgumentNullException(nameof(alumno), "El objeto de alumno es nulo.");
             }
 
-            // Check if a student with the same DNI already exists
             if (await _paIIDbContext.Alumnos.AnyAsync(a => a.NumIdentificacion == alumno.NumIdentificacion))
             {
-                // Return an appropriate response, indicating that the DNI already exists.
                 return null;
             }
 
@@ -74,13 +73,12 @@ namespace PAII_TP_Final.Services
                 _paIIDbContext.Alumnos.Add(alumno);
                 await _paIIDbContext.SaveChangesAsync();
 
-                // At this point, the student has been successfully created.
                 return alumno;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"An error occurred: {ex}");
-                // Handle exceptions or validation errors here as needed.
+
                 return null;
             }
         }
