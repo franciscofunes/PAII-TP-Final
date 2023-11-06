@@ -11,12 +11,14 @@ namespace Data.Entities
         /// El nombre del estudiante.
         /// </summary>
         [Required(ErrorMessage = "El nombre es obligatorio.")]
+        [RegularExpression(@"^[a-zA-Z ]+$", ErrorMessage = "El nombre no debe contener caracteres especiales.")]
         public string? Nombre { get; set; }
 
         /// <summary>
         /// El apellido del estudiante.
         /// </summary>
         [Required(ErrorMessage = "El apellido es obligatorio.")]
+        [RegularExpression(@"^[a-zA-Z ]+$", ErrorMessage = "El apellido no debe contener caracteres especiales.")]
         public string? Apellido { get; set; }
 
         /// <summary>
@@ -37,6 +39,7 @@ namespace Data.Entities
         /// La dirección actual del alumno.
         /// </summary>
         [Required(ErrorMessage = "La dirección es obligatoria.")]
+        [RegularExpression(@"^[A-Za-z0-9\s]+ \d+$", ErrorMessage = "El formato de la dirección no es válido. Debe ser 'Gallo 865' o 'Avenida Cordoba 1234'.")]
         public string? Direccion { get; set; }
 
         /// <summary>
