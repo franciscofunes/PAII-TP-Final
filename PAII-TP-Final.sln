@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PAII-TP-Final", "PAII-TP-Final.csproj", "{899961A1-B095-400F-BD2D-92F0230E1AC2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAII-TP-FINAL.Tests", "PAII-TP-FINAL.Tests\PAII-TP-FINAL.Tests.csproj", "{DCEAB02C-758E-4F97-8BE5-2648EC9432D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{899961A1-B095-400F-BD2D-92F0230E1AC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{899961A1-B095-400F-BD2D-92F0230E1AC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{899961A1-B095-400F-BD2D-92F0230E1AC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCEAB02C-758E-4F97-8BE5-2648EC9432D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCEAB02C-758E-4F97-8BE5-2648EC9432D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCEAB02C-758E-4F97-8BE5-2648EC9432D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCEAB02C-758E-4F97-8BE5-2648EC9432D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
