@@ -18,8 +18,8 @@ builder.Services.AddDbContext<PAIIDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
-builder.Services.AddScoped<IAlumnosService, AlumnosService>(); 
-
+builder.Services.AddScoped<IAlumnosService, AlumnosService>();
+builder.Services.AddScoped<IInscripcionesService, InscripcionesService>();
 
 var app = builder.Build();
 
