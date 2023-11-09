@@ -22,5 +22,14 @@ VALUES
     ('Maria', 'Gomez', 54321, '1992-08-20', '456 Calle Secundaria', '555-987-6543', 'maria.gomez@email.com', 'Medicina', 91.2, '2019-10-15'),
     ('Pedro', 'Rodriguez', 67890, '1988-03-10', '789 Calle Terciaria', '555-456-7890', 'pedro.rodriguez@email.com', 'Derecho', 76.8, '2021-01-05');
 
+CREATE TABLE Inscripciones (
+    Id INT AUTO_INCREMENT NOT NULL,
+    FechaInscripcion DATE NOT NULL,
+    Detalles TEXT,
+    Estado VARCHAR(50) NOT NULL,
+    AlumnoId INT NOT NULL,
+    PRIMARY KEY (Id)
+);
+
 ```
 
