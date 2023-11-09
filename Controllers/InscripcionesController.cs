@@ -40,6 +40,22 @@ namespace PAII_TP_Final.Controllers
 
                 return BadRequest("La creación de inscripción falló.");
             }
+            catch (InvalidOperationException ex)
+            {
+                // Handle specific exceptions with custom messages
+                if (ex.Message.Contains("El ID del Alumno no existe en la base de datos."))
+                {
+                    return BadRequest("El ID del Alumno no existe en la base de datos Alumnos.");
+                }
+                else if (ex.Message.Contains("Ya existe una inscripción para este Alumno."))
+                {
+                    return BadRequest("El AlumnoId ya está asociado a una inscripción existente.");
+                }
+                else
+                {
+                    return StatusCode(500, "Error interno del servidor.");
+                }
+            }
             catch (Exception ex)
             {
                 Console.WriteLine($"An error occurred: {ex}");

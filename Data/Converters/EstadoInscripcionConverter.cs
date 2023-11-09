@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Data.Enums;
-using System;
 
 namespace Data.Converters
 {
@@ -8,8 +7,8 @@ namespace Data.Converters
     {
         public EstadoInscripcionConverter()
             : base(
-                v => ConvertToString(v),
-                v => ConvertToEnum(v)
+                value => ConvertToString(value),
+                value => ConvertToEnum(value)
             )
         {
         }

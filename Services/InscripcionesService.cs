@@ -26,6 +26,15 @@ namespace PAII_TP_Final.Contracts
                 throw new InvalidOperationException("El ID del Alumno no existe en la base de datos.");
             }
 
+            var existingInscripcion = await _paIIDbContext.Inscripciones
+                .FirstOrDefaultAsync(i => i.AlumnoId == inscripcion.AlumnoId);
+
+            if (existingInscripcion != null)
+            {
+                // If an inscripcion with the same AlumnoId already exists, you can handle it accordingly.
+                throw new InvalidOperationException("Ya existe una inscripción para este Alumno.");
+            }
+
             try
             {
                 inscripcion.Estado = inscripcion.Estado;
