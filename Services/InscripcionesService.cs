@@ -1,4 +1,5 @@
 using Data;
+using Data.DTOs;
 using Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,16 @@ namespace PAII_TP_Final.Contracts
             _paIIDbContext = paIIDbContext;
         }
 
+        public async Task<List<InscripcionDTO>> GetAllInscripcionesAsync()
+        {
+            var inscripciones = await _paIIDbContext.Inscripciones.ToListAsync();
+            return inscripciones.Select(i => new InscripcionDTO
+            {
+                Id = i.Id,
+                AlumnoId = i.AlumnoId,
+                Estado = i.Estado.ToString(),
+            }).ToList();
+        }
         public async Task<Inscripcion> CreateInscripcionAsync(Inscripcion inscripcion)
         {
             if (inscripcion == null)

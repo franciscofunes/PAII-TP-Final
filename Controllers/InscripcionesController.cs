@@ -16,6 +16,25 @@ namespace PAII_TP_Final.Controllers
             _inscripcionesService = inscripcionesService;
         }
 
+        [HttpGet]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Inscripcion>))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetAllInscripcionesAsync()
+        {
+            try
+            {
+                var inscripciones = await _inscripcionesService.GetAllInscripcionesAsync();
+
+                return Ok(inscripciones);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex}");
+                return StatusCode(500, "Error interno del servidor.");
+            }
+        }
+
         [HttpPost]
         [Consumes("application/json")]
         [Produces("application/json")]
