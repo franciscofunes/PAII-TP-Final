@@ -8,4 +8,6 @@ public interface IInscripcionesService
         Task<List<InscripcionDTO>> GetAllInscripcionesAsync();
 
         Task<InscripcionDTO> GetInscripcionByIdAsync(int inscripcionId);
+
+        Task<InscripcionDTO> UpdateInscripcionAsync(int inscripcionId, Inscripcion inscripcion);
     }
