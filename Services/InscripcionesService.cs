@@ -62,7 +62,6 @@ namespace PAII_TP_Final.Contracts
 
             if (existingInscripcion != null)
             {
-                // If an inscripcion with the same AlumnoId already exists, you can handle it accordingly.
                 throw new InvalidOperationException("Ya existe una inscripción para este Alumno.");
             }
 
@@ -78,6 +77,37 @@ namespace PAII_TP_Final.Contracts
             {
                 Console.WriteLine($"An error occurred: {ex}");
                 return new Inscripcion();
+            }
+        }
+
+        public async Task<InscripcionDTO> UpdateInscripcionAsync(int inscripcionId, Inscripcion inscripcion)
+        {
+            var existingInscripcion = await _paIIDbContext.Inscripciones.FindAsync(inscripcionId);
+
+            if (existingInscripcion == null)
+            {
+                throw new ArgumentException($"No se encontró la inscripción con ID {inscripcionId}.", nameof(inscripcionId));
+            }
+
+            existingInscripcion.Detalles = inscripcion.Detalles;
+            existingInscripcion.Estado = inscripcion.Estado;
+
+            try
+            {
+                await _paIIDbContext.SaveChangesAsync();
+
+                return new InscripcionDTO
+                {
+                    Id = existingInscripcion.Id,
+                    Detalles = existingInscripcion.Detalles,
+                    Estado = existingInscripcion.Estado.ToString(),
+                    AlumnoId = existingInscripcion.AlumnoId,
+                };
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex}");
+                return new InscripcionDTO();
             }
         }
     }
