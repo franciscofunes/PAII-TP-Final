@@ -20,8 +20,7 @@ public class PAIIDbContext : DbContext
             .Property(a => a.Promedio)
             .HasColumnType("decimal(5, 2)");
 
-              modelBuilder
-        .Entity<Inscripcion>()
+        modelBuilder.Entity<Inscripcion>()
         .Property(e => e.Estado)
         .HasConversion(new EstadoInscripcionConverter());
 

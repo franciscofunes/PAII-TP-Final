@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Data.Entities;
 using System;
 using System.Threading.Tasks;
+using Data.DTOs;
 
 namespace PAII_TP_Final.Controllers
 {
@@ -16,6 +17,55 @@ namespace PAII_TP_Final.Controllers
             _inscripcionesService = inscripcionesService;
         }
 
+        [HttpGet]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<InscripcionDTO>))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetAllInscripcionesAsync()
+        {
+            try
+            {
+                var inscripciones = await _inscripcionesService.GetAllInscripcionesAsync();
+
+                return Ok(inscripciones);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex}");
+                return StatusCode(500, "Error interno del servidor.");
+            }
+        }
+
+        [HttpGet("{inscripcionId}")]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(InscripcionDTO))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetInscripcionByIdAsync(int inscripcionId)
+        {
+            try
+            {
+                var inscripcion = await _inscripcionesService.GetInscripcionByIdAsync(inscripcionId);
+
+                if (inscripcion == null)
+                {
+                    return NotFound($"No se encontró la inscripción con ID {inscripcionId}.");
+                }
+
+                return Ok(inscripcion);
+            }
+            catch (ArgumentException ex) when (ex.ParamName == nameof(inscripcionId))
+            {
+                // Catch the specific exception for non-existing inscripcion ID
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex}");
+                return StatusCode(500, "Error interno del servidor.");
+            }
+        }
+        
         [HttpPost]
         [Consumes("application/json")]
         [Produces("application/json")]

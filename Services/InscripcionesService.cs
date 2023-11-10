@@ -1,4 +1,5 @@
 using Data;
+using Data.DTOs;
 using Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,36 @@ namespace PAII_TP_Final.Contracts
         public InscripcionesService(PAIIDbContext paIIDbContext)
         {
             _paIIDbContext = paIIDbContext;
+        }
+
+        public async Task<List<InscripcionDTO>> GetAllInscripcionesAsync()
+        {
+            var inscripciones = await _paIIDbContext.Inscripciones.ToListAsync();
+            return inscripciones.Select(i => new InscripcionDTO
+            {
+                Id = i.Id,
+                Detalles = i.Detalles,
+                Estado = i.Estado.ToString(),
+                AlumnoId = i.AlumnoId,
+            }).ToList();
+        }
+
+        public async Task<InscripcionDTO> GetInscripcionByIdAsync(int inscripcionId)
+        {
+            var inscripcion = await _paIIDbContext.Inscripciones.FindAsync(inscripcionId);
+
+            if (inscripcion == null)
+            {
+                throw new ArgumentException($"No se encontró la inscripción con ID {inscripcionId}.", nameof(inscripcionId));
+            }
+
+            return new InscripcionDTO
+            {
+                Id = inscripcion.Id,
+                Detalles = inscripcion.Detalles,
+                Estado = inscripcion.Estado.ToString(),
+                AlumnoId = inscripcion.AlumnoId,
+            };
         }
 
         public async Task<Inscripcion> CreateInscripcionAsync(Inscripcion inscripcion)
