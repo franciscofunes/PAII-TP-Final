@@ -20,10 +20,30 @@ namespace PAII_TP_Final.Contracts
             return inscripciones.Select(i => new InscripcionDTO
             {
                 Id = i.Id,
-                AlumnoId = i.AlumnoId,
+                Detalles = i.Detalles,
                 Estado = i.Estado.ToString(),
+                AlumnoId = i.AlumnoId,
             }).ToList();
         }
+
+        public async Task<InscripcionDTO> GetInscripcionByIdAsync(int inscripcionId)
+        {
+            var inscripcion = await _paIIDbContext.Inscripciones.FindAsync(inscripcionId);
+
+            if (inscripcion == null)
+            {
+                throw new ArgumentException($"No se encontró la inscripción con ID {inscripcionId}.", nameof(inscripcionId));
+            }
+
+            return new InscripcionDTO
+            {
+                Id = inscripcion.Id,
+                Detalles = inscripcion.Detalles,
+                Estado = inscripcion.Estado.ToString(),
+                AlumnoId = inscripcion.AlumnoId,
+            };
+        }
+
         public async Task<Inscripcion> CreateInscripcionAsync(Inscripcion inscripcion)
         {
             if (inscripcion == null)
