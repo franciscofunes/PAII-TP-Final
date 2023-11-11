@@ -110,10 +110,10 @@ namespace PAII_TP_Final.Contracts
                 return new InscripcionDTO();
             }
         }
-        
-                public async Task<bool> DeleteInscripcionAsync(Inscripcion inscripcion)
+
+        public async Task<bool> DeleteInscripcionAsync(int inscripcionId)
         {
-            var existingInscripcion = await _paIIDbContext.Inscripciones.FirstOrDefaultAsync(i => i.AlumnoId == inscripcion.AlumnoId);
+            var existingInscripcion = await _paIIDbContext.Inscripciones.FindAsync(inscripcionId);
 
             if (existingInscripcion == null)
             {

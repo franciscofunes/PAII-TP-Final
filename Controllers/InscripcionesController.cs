@@ -131,7 +131,6 @@ namespace PAII_TP_Final.Controllers
             }
             catch (ArgumentException ex)
             {
-                // Handle the specific exception for inscripción not found
                 return NotFound(ex.Message);
             }
             catch (Exception ex)
@@ -146,16 +145,16 @@ namespace PAII_TP_Final.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> DeleteInscripcion(int id)
+        public async Task<IActionResult> DeleteInscripcion(int inscripcionId)
         {
-            var inscripcion = await _inscripcionesService.GetInscripcionByIdAsync(id);
+            var inscripcion = await _inscripcionesService.GetInscripcionByIdAsync(inscripcionId);
 
             if (inscripcion == null)
             {
                 return NotFound();
             }
 
-            var success = await _inscripcionesService.DeleteInscripcionAsync(id);
+            var success = await _inscripcionesService.DeleteInscripcionAsync(inscripcionId);
 
             if (success)
             {
