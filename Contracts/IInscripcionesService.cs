@@ -10,4 +10,6 @@ public interface IInscripcionesService
         Task<InscripcionDTO> GetInscripcionByIdAsync(int inscripcionId);
 
         Task<InscripcionDTO> UpdateInscripcionAsync(int inscripcionId, Inscripcion inscripcion);
+
+        Task<bool> DeleteInscripcionAsync(int inscripcionId);
     }

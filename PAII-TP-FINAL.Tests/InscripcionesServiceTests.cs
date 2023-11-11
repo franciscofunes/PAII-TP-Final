@@ -46,5 +46,29 @@ namespace PAII_TP_FINAL.Tests
                 await Assert.ThrowsAsync<ArgumentException>(async () => await service.GetInscripcionByIdAsync(1));
             }
         }
+
+        [Fact]
+        public async Task DeleteInscripcionAsync_WithValidId_ShouldReturnTrue()
+        {
+            // Arrange
+            var dbContextOptions = new DbContextOptionsBuilder<PAIIDbContext>()
+                .UseInMemoryDatabase(databaseName: "Test_Database")
+                .Options;
+
+            using (var context = new PAIIDbContext(dbContextOptions))
+            {
+                var service = new InscripcionesService(context);
+
+                var inscripcion = new Inscripcion { Id = 1, AlumnoId = 1, Detalles = "Test Details", Estado = EstadoInscripcion.Aceptada };
+                context.Inscripciones.Add(inscripcion);
+                await context.SaveChangesAsync();
+
+                // Act
+                var result = await service.DeleteInscripcionAsync(1);
+
+                // Assert
+                Assert.True(result);
+            }
+        }
     }
 }

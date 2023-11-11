@@ -110,5 +110,28 @@ namespace PAII_TP_Final.Contracts
                 return new InscripcionDTO();
             }
         }
+
+        public async Task<bool> DeleteInscripcionAsync(int inscripcionId)
+        {
+            var existingInscripcion = await _paIIDbContext.Inscripciones.FindAsync(inscripcionId);
+
+            if (existingInscripcion == null)
+            {
+                return false;
+            }
+
+            _paIIDbContext.Inscripciones.Remove(existingInscripcion);
+
+            try
+            {
+                await _paIIDbContext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex}");
+                return false;
+            }
+        }
     }
 }
