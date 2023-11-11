@@ -140,5 +140,31 @@ namespace PAII_TP_Final.Controllers
                 return StatusCode(500, "Error interno del servidor.");
             }
         }
+
+        [HttpDelete("{inscripcionId}")]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> DeleteInscripcion(int id)
+        {
+            var inscripcion = await _inscripcionesService.GetInscripcionByIdAsync(id);
+
+            if (inscripcion == null)
+            {
+                return NotFound();
+            }
+
+            var success = await _inscripcionesService.DeleteInscripcionAsync(id);
+
+            if (success)
+            {
+                return NoContent();
+            }
+            else
+            {
+                return StatusCode(500, "No se pudo eliminar la inscripción.");
+            }
+        }
     }
 }
